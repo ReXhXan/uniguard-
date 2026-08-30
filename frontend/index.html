@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UniGuard — Unidirectional Network Intrusion Detection</title>
+    <meta name="description" content="UniGuard NOC Dashboard: AI-powered unidirectional intrusion detection system with real-time network traffic analysis and threat visualization." />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpolygon points='16,2 28,9 28,23 16,30 4,23 4,9' fill='none' stroke='%2300D9A3' stroke-width='2'/%3E%3Cpolygon points='16,8 22,11.5 22,18.5 16,22 10,18.5 10,11.5' fill='none' stroke='%234A9EFF' stroke-width='1.5'/%3E%3C/svg%3E" />
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <div id="app">
+      <!-- Header Bar -->
+      <header id="header">
+        <div class="header-left">
+          <div class="header-logo" id="header-logo"></div>
+          <div class="header-title">
+            <h1>UNIGUARD</h1>
+            <span class="header-subtitle">UNIDIRECTIONAL NETWORK IDS</span>
+          </div>
+        </div>
+
+        <div class="header-center">
+          <div class="header-status" id="system-status-badge">
+            <span class="status-dot status-dot--online" id="status-dot"></span>
+            <span class="status-label" id="status-label">OPERATIONAL</span>
+          </div>
+        </div>
+
+        <div class="header-right">
+          <button class="btn-attack" id="btn-attack-inject" title="Simulate a Malicious Attack Packet">
+            <span class="btn-attack-icon">⚡</span>
+            INJECT ATTACK
+          </button>
+
+          <button class="btn-demo" id="btn-demo-toggle">
+            <span class="btn-demo-dot" id="btn-demo-dot"></span>
+            DEMO MODE
+          </button>
+
+          <span class="header-clock" id="header-clock">--:--:--</span>
+        </div>
+      </header>
+
+      <!-- Main Grid -->
+      <main id="main-grid">
+        <!-- Left Column: System Status + Analysis Result -->
+        <aside class="panel-column panel-column--left">
+          <section class="panel panel-hud" id="panel-system">
+            <div class="panel-header">
+              <span class="panel-indicator panel-indicator--online" id="panel-system-indicator"></span>
+              <span class="panel-title">SYSTEM STATUS</span>
+            </div>
+            <div class="panel-body">
+              <div class="stat-row">
+                <span class="stat-label">STATUS</span>
+                <span class="stat-value stat-value--safe" id="sys-status">ONLINE</span>
+              </div>
+              <div class="stat-row">
+                <span class="stat-label">UPTIME</span>
+                <span class="stat-value" id="sys-uptime">00:00:00</span>
+              </div>
+              <div class="stat-row">
+                <span class="stat-label">MODEL</span>
+                <span class="stat-value stat-value--sm">XGBoost Unidirectional</span>
+              </div>
+              <div class="stat-row">
+                <span class="stat-label">FEATURES</span>
+                <span class="stat-value">35 fwd-direction</span>
+              </div>
+              <div class="stat-row">
+                <span class="stat-label">BACKEND</span>
+                <span class="stat-value" id="sys-backend">CHECKING…</span>
+              </div>
+            </div>
+          </section>
+
+          <section class="panel panel-hud" id="panel-analysis">
+            <div class="panel-header">
+              <span class="panel-indicator panel-indicator--online" id="panel-analysis-indicator"></span>
+              <span class="panel-title">ANALYSIS RESULT</span>
+            </div>
+            <div class="panel-body">
+              <div class="analysis-verdict" id="analysis-verdict">
+                <span class="verdict-label">AWAITING SCAN</span>
+              </div>
+              <div class="analysis-probability">
+                <span class="stat-label">MALICIOUS PROBABILITY</span>
+                <div class="prob-bar-container">
+                  <div class="prob-bar" id="prob-bar"></div>
+                </div>
+                <span class="prob-value" id="prob-value">0.0000</span>
+              </div>
+              <div class="analysis-features" id="analysis-features">
+                <span class="stat-label">SCAN INFO</span>
+                <div class="feature-list" id="feature-list">
+                  <span class="feature-item">—</span>
+                </div>
+              </div>
+            </div>
+          </section>
+        </aside>
+
+        <!-- Center: Connected Network Topology Canvas -->
+        <div class="canvas-container" id="canvas-container">
+          <canvas id="noc-canvas"></canvas>
+
+          <!-- Floating Map HUD Legend -->
+          <div class="canvas-hud-legend">
+            <div class="legend-item"><span class="legend-dot legend-dot--safe"></span> Safe Data Packet</div>
+            <div class="legend-item"><span class="legend-dot legend-dot--threat"></span> Threat Packet</div>
+            <div class="legend-item"><span class="legend-dot legend-dot--diode"></span> One-Way Gate</div>
+          </div>
+        </div>
+
+        <!-- Right Column: Traffic Monitor + Event Log -->
+        <aside class="panel-column panel-column--right">
+          <section class="panel panel-hud" id="panel-traffic">
+            <div class="panel-header">
+              <span class="panel-indicator panel-indicator--online" id="panel-traffic-indicator"></span>
+              <span class="panel-title">TRAFFIC MONITOR</span>
+            </div>
+            <div class="panel-body">
+              <div class="stat-row">
+                <span class="stat-label">PACKETS ANALYZED</span>
+                <span class="stat-value stat-value--lg" id="stat-packets">0</span>
+              </div>
+              <div class="stat-row">
+                <span class="stat-label">THREATS DETECTED</span>
+                <span class="stat-value stat-value--lg stat-value--threat" id="stat-threats">0</span>
+              </div>
+              <div class="stat-row">
+                <span class="stat-label">BENIGN</span>
+                <span class="stat-value stat-value--safe" id="stat-benign">0</span>
+              </div>
+              <div class="stat-row">
+                <span class="stat-label">THREAT RATIO</span>
+                <span class="stat-value" id="stat-ratio">0.00%</span>
+              </div>
+              <div class="stat-row">
+                <span class="stat-label">LAST SCAN</span>
+                <span class="stat-value" id="stat-last-scan">—</span>
+              </div>
+              <div class="threat-gauge">
+                <span class="stat-label">THREAT LEVEL</span>
+                <div class="gauge-bar-container">
+                  <div class="gauge-bar" id="threat-gauge-bar"></div>
+                </div>
+                <span class="gauge-label" id="threat-gauge-label">NOMINAL</span>
+              </div>
+            </div>
+          </section>
+
+          <section class="panel panel-hud" id="panel-log">
+            <div class="panel-header">
+              <span class="panel-indicator panel-indicator--online" id="panel-log-indicator"></span>
+              <span class="panel-title">EVENT LOG</span>
+            </div>
+            <div class="panel-body panel-body--log">
+              <div class="log-entries" id="log-entries">
+                <div class="log-entry log-entry--info">
+                  <span class="log-time">--:--:--</span>
+                  <span class="log-msg">UniGuard initialized. Monitoring network topology…</span>
+                </div>
+              </div>
+            </div>
+          </section>
+        </aside>
+      </main>
+    </div>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

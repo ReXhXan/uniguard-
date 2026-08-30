@@ -1,0 +1,21 @@
+# Large Datasets
+backend/data/
+*.csv
+*.zip
+*.tar.gz
+
+# Dependencies
+node_modules/
+.venv/
+venv/
+__pycache__/
+*.pyc
+
+# Environment & Local files
+.env
+.env.local
+*.log
+
+# Build outputs
+dist/
+build/
