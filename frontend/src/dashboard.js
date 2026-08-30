@@ -1,5 +1,5 @@
 /**
- * UniGuard NOC Dashboard — Panel Controllers
+ * FlowDiode NOC Dashboard — Panel Controllers
  *
  * Manages the four status panels: System Status, Traffic Monitor,
  * Analysis Result, and Event Log.

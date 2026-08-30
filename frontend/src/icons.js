@@ -1,5 +1,5 @@
 /**
- * SVG Line-Art Icons for UniGuard NOC Dashboard
+ * SVG Line-Art Icons for FlowDiode NOC Dashboard
  * Clean outlines, stroke-only, inheriting color via currentColor.
  */
 

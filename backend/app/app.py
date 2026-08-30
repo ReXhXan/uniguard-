@@ -16,7 +16,7 @@ features = saved["features"]
 def home():
     return jsonify({
         "status": "online",
-        "model": "UniGuard Unidirectional IDS",
+        "model": "FlowDiode Unidirectional IDS",
         "features": len(features)
     })
 

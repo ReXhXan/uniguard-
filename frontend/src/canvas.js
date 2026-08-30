@@ -1,5 +1,5 @@
 /**
- * UniGuard NOC Canvas — Connected Network Topology Visualization
+ * FlowDiode NOC Canvas — Connected Network Topology Visualization
  *
  * Renders an interconnected multi-node cybersecurity graph:
  * [Subnet Alpha / Edge Cloud / IoT] ──→ [Ingress Hub] ──→ [One-Way Gate] ──→ [AI Sentinel] ──→ [Secure Vault / SOC Console]

@@ -1,6 +1,6 @@
-# UniGuard — Unidirectional Network Intrusion Detection System (IDS)
+# FlowDiode — Unidirectional Network Intrusion Detection System (IDS)
 
-UniGuard is an AI-powered Unidirectional Intrusion Detection System built with an XGBoost machine learning core, Flask REST API backend, and a Network Operations Center (NOC) dashboard visualizing real-time connected network traffic passing through a hardware Data Diode.
+FlowDiode is an AI-powered Unidirectional Intrusion Detection System built with an XGBoost machine learning core, Flask REST API backend, and a Network Operations Center (NOC) dashboard visualizing real-time connected network traffic passing through a hardware Data Diode.
 
 ## 🚀 Features
 
@@ -18,7 +18,7 @@ UniGuard is an AI-powered Unidirectional Intrusion Detection System built with a
 ## 🛠️ Project Structure
 
 ```
-uniguard/
+flowdiode/
 ├── backend/
 │   ├── app/
 │   │   └── app.py              # Flask REST API server (/predict)

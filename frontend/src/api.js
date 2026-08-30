@@ -1,5 +1,5 @@
 /**
- * UniGuard API Integration & Demo Traffic Generator
+ * FlowDiode API Integration & Demo Traffic Generator
  */
 
 const API_BASE = '/api';

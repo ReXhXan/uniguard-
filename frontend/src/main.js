@@ -1,5 +1,5 @@
 /**
- * UniGuard NOC — Main Entry Point
+ * FlowDiode NOC — Main Entry Point
  *
  * Initializes all modules, manages the demo loop,
  * and orchestrates the flow between API → Canvas → Dashboard.
@@ -46,7 +46,7 @@ function init() {
   checkBackendStatus();
   setInterval(checkBackendStatus, 15000);
 
-  addSystemLog('UniGuard NOC Dashboard initialized');
+  addSystemLog('FlowDiode NOC Dashboard initialized');
   addSystemLog('Connected Network Topology: ACTIVE');
   addSystemLog('Checking backend connection…');
 
